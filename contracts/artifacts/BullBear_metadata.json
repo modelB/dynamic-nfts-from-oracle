@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.7+commit.e28d00a7"
+		"version": "0.8.17+commit.8df45f5f"
 	},
 	"language": "Solidity",
 	"output": {
@@ -704,6 +704,14 @@
 				"dweb:/ipfs/QmWvwAFDHp5fQNPFQ5shAFh5YRNNzqLMoS5LZYDjPnydFw"
 			]
 		},
+		"@chainlink/contracts/src/v0.8/VRFConsumerBaseV2.sol": {
+			"keccak256": "0x3d709a5e0f1f9b8841172b10ba8af785dd51a13eda9fc395723a706e51329904",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://038eef992d813c20737fbe94e3a36e5d541d1aa736158dd2a43dd5b840b8c360",
+				"dweb:/ipfs/QmZWJ25Yr1sUSAsfJRKvTMDmGkmy63hHhB495CUL1bpNz4"
+			]
+		},
 		"@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol": {
 			"keccak256": "0x6e6e4b0835904509406b070ee173b5bc8f677c19421b76be38aea3b1b3d30846",
 			"license": "MIT",
@@ -718,6 +726,14 @@
 			"urls": [
 				"bzz-raw://b738dba680a6fbc4afc85819743f13f5b7f4790ec8634c9894e1160327b11b6e",
 				"dweb:/ipfs/Qmbv3euvQppeBm2g61khcJSRMZWi78xUWzbnjKAvDBnka4"
+			]
+		},
+		"@chainlink/contracts/src/v0.8/interfaces/VRFCoordinatorV2Interface.sol": {
+			"keccak256": "0x54cdc97717cbae1a51a5500c8ee4875ebf056c95b54d2155a9544a79cb4f4494",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://4bd670a55aacc0ab372835cd7e21b487f9fb69d8c6375234b68862a58f3b1153",
+				"dweb:/ipfs/QmRMdB9TFLgG1LXg9VSTWbZZ1yf3uY1RY3pPkoMN23JfZk"
 			]
 		},
 		"@openzeppelin/contracts/access/Ownable.sol": {
@@ -833,11 +849,11 @@
 			]
 		},
 		"contracts/Bull&Bear.sol": {
-			"keccak256": "0x589d6e4325fdd9b7f382c03c28e249acfe23b8df6e64444f28cea3ac5bf722cd",
+			"keccak256": "0xc74b4cf167895f2b0e82ca9535f594224c16708660d6ddd535a4e69d440ad4f3",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://d8286df0efae4a6a01d3fd986cf7bda551ac1db06596fb1ab8e12e924ad1806f",
-				"dweb:/ipfs/QmeVzZLXMRfsSE4q7ewDRKKXqHa2TmWDLrs5Q5yf2DrU77"
+				"bzz-raw://5629e834a7f8c6bf307e8f87996e4aa19b01fa7a351a572f07df654ab397fe28",
+				"dweb:/ipfs/QmdNxh8di2NnXnx83U1R8tnqa6L4ZRAVQjM1ypWjv7289w"
 			]
 		},
 		"hardhat/console.sol": {
