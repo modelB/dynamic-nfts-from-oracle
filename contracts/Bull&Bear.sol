@@ -80,7 +80,7 @@ contract BullBear is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable, Keeper
     event TokensUpdated(string marketTrend);
 
     // goerli vrfcoordinator 0x2Ca8E0C643bDe4C2E08ab1fA0da3401AdAD7734D
-    constructor(uint256 intervalArg, address _pricefeed, uint64 subscriptionId, address _vrfCoordinator) ERC721("Bull&Bear", "BBTK") {
+    constructor(uint256 intervalArg, address _pricefeed, uint64 subscriptionId, address _vrfCoordinator) ERC721("Bull&Bear", "BBTK") VRFConsumerBaseV2(_vrfCoordinator) {
         s_subscriptionId = subscriptionId;
         vrfCoordinator = _vrfCoordinator;
         COORDINATOR = VRFCoordinatorV2Interface(vrfCoordinator);
