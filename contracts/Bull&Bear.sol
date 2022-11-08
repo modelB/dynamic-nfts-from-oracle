@@ -30,25 +30,17 @@ contract BullBear is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable, Keeper
     uint256 lastUpdated = block.timestamp;
     uint256 public /* immutable */ interval;
     int256 public currentPrice;
-    struct RequestStatus {
-        bool fulfilled; // whether the request has been successfully fulfilled
-        bool exists; // whether a requestId exists
-        uint256[] randomWords;
-    }
-    mapping(uint256 => RequestStatus) public s_requests; /* requestId --> requestStatus */
+    
+    uint256 public requestId;
     VRFCoordinatorV2Interface COORDINATOR;
 
     // Your subscription ID.
     uint64 s_subscriptionId;
 
-    // past requests Id.
-    uint256[] public requestIds;
-    uint256 public lastRequestId;
-
     uint256[] public s_randomWords;
 
     bytes32 keyHash = 0x79d3d8832d904592c0bf9818b621522c988bb8b0c05cdc3b15aea1b6e8db0c15;
-    uint32 callbackGasLimit = 100000;
+    uint32 callbackGasLimit = 300000;
 
     // The default is 3, but you can set this higher.
     uint16 requestConfirmations = 3;
@@ -122,9 +114,6 @@ contract BullBear is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable, Keeper
             callbackGasLimit,
             numWords
         );
-        s_requests[requestId] = RequestStatus({randomWords: new uint256[](0), exists: true, fulfilled: false});
-        requestIds.push(requestId);
-        lastRequestId = requestId;
         emit RequestSent(requestId, numWords);
         return requestId;
     }
@@ -151,10 +140,19 @@ contract BullBear is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable, Keeper
         emit TokensUpdated(trend);
     }
 
-    function getRequestStatus(uint256 _requestId) external view returns (bool fulfilled, uint256[] memory randomWords) {
-        require(s_requests[_requestId].exists, 'request not found');
-        RequestStatus memory request = s_requests[_requestId];
-        return (request.fulfilled, request.randomWords);
+    function requestRandomnessForNFTUris() internal {
+        require(s_subscriptionId != 0, "Subscription ID not set"); 
+
+        // Will revert if subscription is not set and funded.
+        requestId = COORDINATOR.requestRandomWords(
+            keyHash,
+            s_subscriptionId, // See https://vrf.chain.link/
+            3, //minimum confirmations before response
+            callbackGasLimit,
+            1 // `numWords` : number of random values we want. Max number for rinkeby is 500 (https://docs.chain.link/docs/vrf-contracts/#rinkeby-testnet)
+        );
+
+        console.log("Request ID: ", requestId);
     }
 
     // The following functions are overrides required by Solidity.
@@ -204,21 +202,16 @@ contract BullBear is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable, Keeper
             lastUpdated = block.timestamp;         
             int latestPrice = getLatestPrice();
         
-            if (latestPrice == currentPrice) {
-                console.log("NO CHANGE -> returning!");
-                return;
-            }
-
             if (latestPrice < currentPrice) {
                 // bear
-                console.log("ITS BEAR TIME");
-                updateAllTokenUris("bear");
-
+                currentMarketTrend = MarketTrend.BEAR;
             } else {
                 // bull
-                console.log("ITS BULL TIME");
-                updateAllTokenUris("bull");
+                currentMarketTrend = MarketTrend.BULL;
             }
+
+            requestRandomnessForNFTUris();
+           
 
             // update currentPrice
             currentPrice = latestPrice;
@@ -242,23 +235,6 @@ contract BullBear is ERC721, ERC721Enumerable, ERC721URIStorage, Ownable, Keeper
         ) = pricefeed.latestRoundData();
 
         return price; //  example price returned 3034715771688
-    }
-
-    function updateAllTokenUris(string memory trend) internal {
-        if (compareStrings("bear", trend)) {
-            console.log(" UPDATING TOKEN URIS WITH ", "bear", trend);
-            for (uint i = 0; i < _tokenIdCounter.current() ; i++) {
-                _setTokenURI(i, bearUrisIpfs[0]);
-            } 
-            
-        } else {     
-            console.log(" UPDATING TOKEN URIS WITH ", "bull", trend);
-
-            for (uint i = 0; i < _tokenIdCounter.current() ; i++) {
-                _setTokenURI(i, bullUrisIpfs[0]);
-            }  
-        }   
-        emit TokensUpdated(trend);
     }
 
     function setPriceFeed(address newFeed) public onlyOwner {

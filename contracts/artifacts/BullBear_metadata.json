@@ -312,30 +312,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_requestId",
-						"type": "uint256"
-					}
-				],
-				"name": "getRequestStatus",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "fulfilled",
-						"type": "bool"
-					},
-					{
-						"internalType": "uint256[]",
-						"name": "randomWords",
-						"type": "uint256[]"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [],
 				"name": "interval",
 				"outputs": [
@@ -367,19 +343,6 @@
 						"internalType": "bool",
 						"name": "",
 						"type": "bool"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "lastRequestId",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
 					}
 				],
 				"stateMutability": "view",
@@ -482,14 +445,8 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "requestIds",
+				"inputs": [],
+				"name": "requestId",
 				"outputs": [
 					{
 						"internalType": "uint256",
@@ -527,30 +484,6 @@
 						"internalType": "uint256",
 						"name": "",
 						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "s_requests",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "fulfilled",
-						"type": "bool"
-					},
-					{
-						"internalType": "bool",
-						"name": "exists",
-						"type": "bool"
 					}
 				],
 				"stateMutability": "view",
@@ -1095,11 +1028,11 @@
 			]
 		},
 		"contracts/Bull&Bear.sol": {
-			"keccak256": "0x981506d4d9ba574fc8450850b90e6220088e129609cd753464c33d1f7401389c",
+			"keccak256": "0xfdda488d779a258d47f97d4dcd45c9684b30bc81d450be11ab3ab526d9b0a942",
 			"license": "GPL-3.0",
 			"urls": [
-				"bzz-raw://f5c8c6eead007474d8d34c5f1fd4266cb0015407aa444166ff58a92945706631",
-				"dweb:/ipfs/QmbWJ8gW8bPkT3gy5gRzLBoBgivfKWEoTN5LfcoxBscUbQ"
+				"bzz-raw://ce359e96afa2531705d95cc545e6e509797f021ef7b4c17a448a5f4854bd69ec",
+				"dweb:/ipfs/QmfWs2QXMyJVMYjzHPE13zuxsSXdedgdyrcvCLN1bTkKG2"
 			]
 		},
 		"hardhat/console.sol": {
